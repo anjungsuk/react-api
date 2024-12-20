@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    hikari:
+      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      url: jdbc:log4jdbc:jdbc:h2:mem:test
+      username: sa
+      password:
+    #H2
+    h2:
+      console: # H2 DB를 웹에서 관리할 수 있는 기능
+        enabled: true           # H2 Console 사용 여부
+        path: /h2-console       # H2 Console 접속 주소
+  #JPA
+    jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+      hibernate:
+        ddl-auto: create
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.H2Dialect
+          format_spq: true #쿼리 로그 포맷
+          show_sql: true #쿼리 로그 출력
