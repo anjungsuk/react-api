@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration>
+    <Properties>
+        <Property name="LOG_LEVEL_PATTERN">{%5p}{FATAL=red blink, ERROR=red bold, WARN=yellow bold, INFO=green bold, DEBUG=blue bold, TRACE=blue}</Property>
+    </Properties>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout disableAnsi="false" pattern="%style{%d{MM-dd HH:mm:ss}}{magenta} %highlight${LOG_LEVEL_PATTERN} %style{[%c{1.1.1.*}]}{cyan} %m%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="java.sql" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Logger name="jdbc.sqltiming" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Logger name="org.springframework" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        <Logger name="jdbc.resultsettable" additivity="false">
+            <level value="info" />
+            <appender-ref ref="console-log4jdbc" />
+        </Logger>
+    </Loggers>
+    출처: https://mine-it-record.tistory.com/205 [나만의 기록들:티스토리]
+</configuration>
