@@ -1,4 +1,4 @@
-package com.interplug.reactapi.reactapi;
+package com.interplug.reactapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

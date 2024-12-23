@@ -1,4 +1,4 @@
-package com.interplug.reactapi.reactapi.biz.config.swagger;
+package com.interplug.reactapi.biz.config.swagger;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

@@ -1,4 +1,4 @@
-package com.interplug.reactapi.reactapi.biz.mock;
+package com.interplug.reactapi.biz.controller.mock;
 
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,7 +26,6 @@ public class MockController {
     @Operation(summary = "목록조회", description = "조회 성공시 게시판 목록을 반환한다.")
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
-    @Parameter()
     @PostMapping("/list")
     public String list(){
 

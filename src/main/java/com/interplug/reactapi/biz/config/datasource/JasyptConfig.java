@@ -1,4 +1,4 @@
-package com.interplug.reactapi.reactapi.biz.config.datasource;
+package com.interplug.reactapi.biz.config.datasource;
 
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;

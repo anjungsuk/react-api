@@ -1,4 +1,4 @@
-package com.interplug.reactapi.reactapi;
+package com.interplug.reactapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
