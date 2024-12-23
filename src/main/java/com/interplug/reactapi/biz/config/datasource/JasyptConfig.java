@@ -16,12 +16,13 @@ public class JasyptConfig {
      *
      *
      * <pre>
-     * jasyptEncryptor 설정
+     * DB Password jasyptEncryptor 암호화 설정
      * </pre>
-     *
-     * @author junguKang
-     * @return StringEncryptor
+     * TODO: 추후 혼자 사용시 암호화 Config 설정 필요
+     * @author junguKang (junguKang)
+     * @ModifyDate 2024.12.13
      */
+    
     /*@Bean(name = "jasyptStringEncryptor")
     public StringEncryptor jasyptStringEncryptor() {
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
