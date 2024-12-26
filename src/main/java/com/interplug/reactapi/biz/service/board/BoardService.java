@@ -2,6 +2,7 @@ package com.interplug.reactapi.biz.service.board;
 
 import com.interplug.reactapi.biz.dto.board.BoardSaveRequestDto;
 import com.interplug.reactapi.biz.dto.board.BoardSearchResponseDto;
+import com.interplug.reactapi.biz.dto.board.BoardUpdateRequestDto;
 import com.interplug.reactapi.biz.entity.BoardEntity;
 import com.interplug.reactapi.biz.repository.board.BoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -48,5 +49,24 @@ public class BoardService {
     public void saveBoard(BoardSaveRequestDto boardSaveRequestDto){
         BoardEntity boardEntity = boardSaveRequestDto.toEntity();
         BoardEntity savedBoardEntity = boardRepository.save(boardEntity);
+    }
+
+    /**
+     *
+     *
+     * <pre>
+     * 통합게시판 게시글 수정
+     * </pre>
+     *
+     * @author junguKang (junguKang)
+     * @return void
+     * @ModifyDate 2024.12.13
+     */
+    public void updateBoard(Long id, BoardUpdateRequestDto boardUpdateRequestDto){
+
+        BoardEntity boardEntity = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(id + " 의 게시글을 조회 할 수 없습니다."));
+        boardEntity.update(boardUpdateRequestDto.getCategoryCd(), boardUpdateRequestDto.getTitle(), boardUpdateRequestDto.getCont(), boardUpdateRequestDto.getModDt());
+
+        boardRepository.save(boardEntity);
     }
 }

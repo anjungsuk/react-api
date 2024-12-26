@@ -2,6 +2,7 @@ package com.interplug.reactapi.biz.controller.board;
 
 import com.interplug.reactapi.biz.dto.board.BoardSaveRequestDto;
 import com.interplug.reactapi.biz.dto.board.BoardSearchResponseDto;
+import com.interplug.reactapi.biz.dto.board.BoardUpdateRequestDto;
 import com.interplug.reactapi.biz.entity.BoardEntity;
 import com.interplug.reactapi.biz.service.board.BoardService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,7 +30,7 @@ public class BoardController {
      * </pre>
      *
      * @author junguKang (junguKang)
-     * @ModifyDate 2024.12.13
+     * @ModifyDate 2024.12.21
      */
     @Tag(name = "목록 조회")
     @Operation(summary = "목록조회", description = "조회 성공시 게시판 목록을 반환한다.")
@@ -49,7 +50,7 @@ public class BoardController {
      * </pre>
      *
      * @author junguKang (junguKang)
-     * @ModifyDate 2024.12.13
+     * @ModifyDate 2024.12.21
      */
     @Tag(name="게시글 저장")
     @Operation(summary = "게시글 저장", description = "작성한 통합게시판 게시글을 저장한다.")
@@ -62,5 +63,26 @@ public class BoardController {
         boardService.saveBoard(boardSaveRequestDto);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    /**
+     *
+     *
+     * <pre>
+     * 게시글 수정 Controller
+     * </pre>
+     *
+     * @author junguKang (junguKang)
+     * @ModifyDate 2024.12.26
+     */
+    @Tag(name="게시글 수정")
+    @Operation(summary = "게시글 수정", description = "작성한 통합게시판 게시글을 수정한다.")
+    @ApiResponse(responseCode = "200", description = "OK")
+    @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    @ApiResponse(responseCode = "500", description = "INTERNER SEVER ERROR")
+    @PutMapping("/listUpdate")
+    public ResponseEntity<BoardEntity> updateBoard(@RequestParam Long id, @RequestBody BoardUpdateRequestDto boardUpdateRequestDto){
+        boardService.updateBoard(id, boardUpdateRequestDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

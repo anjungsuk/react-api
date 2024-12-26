@@ -2,6 +2,7 @@ package com.interplug.reactapi.biz.repository.board;
 
 import com.interplug.reactapi.biz.entity.BoardEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 /**
  *

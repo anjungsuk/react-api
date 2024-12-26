@@ -44,7 +44,7 @@ public class BoardEntity{
     private LocalDateTime modDt;
 
     @Builder
-    public BoardEntity(String categoryCd, String title, String cont, String writerNm,
+    public BoardEntity(int boardNo, String categoryCd, String title, String cont, String writerNm,
                        String password, Integer viewCnt, LocalDateTime regDt, LocalDateTime modDt) {
         this.categoryCd = categoryCd;
         this.title = title;
@@ -53,6 +53,14 @@ public class BoardEntity{
         this.password = password;
         this.viewCnt = viewCnt;
         this.regDt = regDt;
+        this.modDt = modDt;
+        this.boardNo = boardNo;
+    }
+
+    public void update(String categoryCd, String title, String cont, LocalDateTime modDt) {
+        this.categoryCd = categoryCd;
+        this.title = title;
+        this.cont = cont;
         this.modDt = modDt;
     }
 }
