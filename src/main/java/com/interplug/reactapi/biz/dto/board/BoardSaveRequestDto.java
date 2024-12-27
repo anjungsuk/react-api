@@ -24,10 +24,6 @@ public class BoardSaveRequestDto {
     private String title;
     @NotEmpty
     private String cont;
-    @ColumnDefault(value = "0")
-    private int viewCnt;
-    @CreationTimestamp
-    private LocalDateTime regDt;
 
     /**
      *
@@ -41,15 +37,12 @@ public class BoardSaveRequestDto {
      */
 
     @Builder
-    public BoardSaveRequestDto(String writerNm, String password, String categoryCd, String title, String cont, int viewCnt, LocalDateTime regDt) {
+    public BoardSaveRequestDto(String writerNm, String password, String categoryCd, String title, String cont) {
         this.writerNm = writerNm;
         this.password = password;
         this.categoryCd = categoryCd;
         this.title = title;
         this.cont = cont;
-        this.viewCnt = viewCnt;
-        this.regDt = regDt;
-
     }
 
     public BoardEntity toEntity() {
@@ -59,8 +52,6 @@ public class BoardSaveRequestDto {
                 .cont(cont)
                 .writerNm(writerNm)
                 .password(password)
-                .viewCnt(viewCnt)
-                .regDt(regDt)
                 .build();
     }
 }

@@ -65,8 +65,23 @@ public class BoardService {
     public void updateBoard(Long id, BoardUpdateRequestDto boardUpdateRequestDto){
 
         BoardEntity boardEntity = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(id + " 의 게시글을 조회 할 수 없습니다."));
-        boardEntity.update(boardUpdateRequestDto.getCategoryCd(), boardUpdateRequestDto.getTitle(), boardUpdateRequestDto.getCont(), boardUpdateRequestDto.getModDt());
+        boardEntity.update(boardUpdateRequestDto);
 
         boardRepository.save(boardEntity);
+    }
+    /**
+     *
+     *
+     * <pre>
+     * 통합게시판 게시글 삭제
+     * </pre>
+     *
+     * @author junguKang (junguKang)
+     * @return void
+     * @ModifyDate 2024.12.26
+     */
+    public void deleteBoard(Long id){
+        BoardEntity boardEntity = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(id + "의 삭제 할 게시글을 찾을수 없습니다."));
+        boardRepository.deleteById(id);
     }
 }

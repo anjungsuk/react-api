@@ -1,10 +1,13 @@
 package com.interplug.reactapi.biz.entity;
 
+import ch.qos.logback.classic.Logger;
+import com.interplug.reactapi.biz.dto.board.BoardUpdateRequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +17,7 @@ import java.time.LocalDateTime;
 @Table(name = "bt_tb_board")
 public class BoardEntity{
 
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(BoardEntity.class);
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_no", nullable = false)
@@ -34,7 +38,7 @@ public class BoardEntity{
     @Column(name = "password", nullable = false, length = 100)
     private String password;
 
-    @Column(name = "view_cnt")
+    @Column(name = "view_cnt", nullable = false)
     private int viewCnt;
 
     @Column(name = "reg_dt", nullable = false)
@@ -43,9 +47,22 @@ public class BoardEntity{
     @Column(name = "mod_dt")
     private LocalDateTime modDt;
 
+    @PrePersist
+    public void prePersist() {
+        this.regDt = LocalDateTime.now();
+        log.info("prePersist");
+        this.viewCnt = 0;
+        log.info("prePersist viewCnt={}", viewCnt);
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.modDt = LocalDateTime.now();
+    }
+
     @Builder
     public BoardEntity(int boardNo, String categoryCd, String title, String cont, String writerNm,
-                       String password, Integer viewCnt, LocalDateTime regDt, LocalDateTime modDt) {
+                       String password, int viewCnt, LocalDateTime regDt, LocalDateTime modDt) {
         this.categoryCd = categoryCd;
         this.title = title;
         this.cont = cont;
@@ -57,10 +74,9 @@ public class BoardEntity{
         this.boardNo = boardNo;
     }
 
-    public void update(String categoryCd, String title, String cont, LocalDateTime modDt) {
-        this.categoryCd = categoryCd;
-        this.title = title;
-        this.cont = cont;
-        this.modDt = modDt;
+    public void update(BoardUpdateRequestDto boardUpdateRequestDto) {
+        this.categoryCd = boardUpdateRequestDto.getCategoryCd();
+        this.title = boardUpdateRequestDto.getTitle();
+        this.cont = boardUpdateRequestDto.getCont();
     }
 }

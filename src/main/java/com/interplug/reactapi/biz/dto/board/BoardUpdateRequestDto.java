@@ -31,15 +31,12 @@ public class BoardUpdateRequestDto {
     private String title;
     @NotBlank
     private String cont;
-    @CreationTimestamp
-    private LocalDateTime modDt;
 
     @Builder
-    public BoardUpdateRequestDto(String categoryCd, String title, String cont, LocalDateTime modDt) {
+    public BoardUpdateRequestDto(String categoryCd, String title, String cont) {
         this.categoryCd = categoryCd;
         this.title = title;
         this.cont = cont;
-        this.modDt = modDt;
     }
 
 }

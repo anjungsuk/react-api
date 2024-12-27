@@ -36,7 +36,7 @@ public class BoardController {
     @Operation(summary = "목록조회", description = "조회 성공시 게시판 목록을 반환한다.")
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
-    @GetMapping("/list")
+    @PostMapping("/list")
     public ResponseEntity<List<BoardSearchResponseDto>> getBoardList(){
         List<BoardSearchResponseDto> boardList = boardService.getBoardList();
         return ResponseEntity.ok(boardList);
@@ -83,6 +83,27 @@ public class BoardController {
     @PutMapping("/listUpdate")
     public ResponseEntity<BoardEntity> updateBoard(@RequestParam Long id, @RequestBody BoardUpdateRequestDto boardUpdateRequestDto){
         boardService.updateBoard(id, boardUpdateRequestDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     *
+     *
+     * <pre>
+     * 게시글 삭제 Controller
+     * </pre>
+     *
+     * @author junguKang (junguKang)
+     * @ModifyDate 2024.12.27
+     */
+    @Tag(name="게시글 삭제")
+    @Operation(summary = "게시글 삭제", description = "작성한 통합게시판 게시글을 삭제한다.")
+    @ApiResponse(responseCode = "200", description = "OK")
+    @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    @ApiResponse(responseCode = "500", description = "INTERNER SEVER ERROR")
+    @GetMapping("/listDelete/{id}")
+    public ResponseEntity<BoardEntity> deleteBoard(@RequestParam Long id){
+        boardService.deleteBoard(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
