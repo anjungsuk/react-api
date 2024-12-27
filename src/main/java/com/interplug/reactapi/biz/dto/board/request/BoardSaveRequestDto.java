@@ -1,15 +1,10 @@
-package com.interplug.reactapi.biz.dto.board;
+package com.interplug.reactapi.biz.dto.board.request;
 
 import com.interplug.reactapi.biz.entity.BoardEntity;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.cglib.core.Local;
-
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor

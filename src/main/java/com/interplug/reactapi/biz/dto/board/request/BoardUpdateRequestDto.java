@@ -1,15 +1,9 @@
-package com.interplug.reactapi.biz.dto.board;
+package com.interplug.reactapi.biz.dto.board.request;
 
-import com.interplug.reactapi.biz.entity.BoardEntity;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-
-import java.time.LocalDateTime;
 
 /**
  *

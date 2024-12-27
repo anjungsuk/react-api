@@ -1,8 +1,9 @@
 package com.interplug.reactapi.biz.controller.board;
 
-import com.interplug.reactapi.biz.dto.board.BoardSaveRequestDto;
-import com.interplug.reactapi.biz.dto.board.BoardSearchResponseDto;
-import com.interplug.reactapi.biz.dto.board.BoardUpdateRequestDto;
+import com.interplug.reactapi.biz.dto.board.request.BoardSaveRequestDto;
+import com.interplug.reactapi.biz.dto.board.response.BoardSearchDetailResponseDto;
+import com.interplug.reactapi.biz.dto.board.response.BoardSearchResponseDto;
+import com.interplug.reactapi.biz.dto.board.request.BoardUpdateRequestDto;
 import com.interplug.reactapi.biz.entity.BoardEntity;
 import com.interplug.reactapi.biz.service.board.BoardService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -57,8 +58,9 @@ public class BoardController {
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNER SEVER ERROR")
     @GetMapping("/listDetail/{id}")
-    public ResponseEntity<BoardEntity> getBoardDetail(@RequestParam Long id){
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<BoardSearchDetailResponseDto> getBoardDetail(@RequestParam Long id){
+        BoardSearchDetailResponseDto boardSearchDetailResponseDto = boardService.getBoardDetail(id);
+        return ResponseEntity.ok(boardSearchDetailResponseDto);
     }
 
     /**

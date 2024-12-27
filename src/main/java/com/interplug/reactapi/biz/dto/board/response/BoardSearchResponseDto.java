@@ -1,11 +1,10 @@
-package com.interplug.reactapi.biz.dto.board;
+package com.interplug.reactapi.biz.dto.board.response;
 
 import com.interplug.reactapi.biz.entity.BoardEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.swing.text.html.parser.Entity;
 import java.time.LocalDateTime;
 
 @Getter

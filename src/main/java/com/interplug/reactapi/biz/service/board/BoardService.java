@@ -1,8 +1,9 @@
 package com.interplug.reactapi.biz.service.board;
 
-import com.interplug.reactapi.biz.dto.board.BoardSaveRequestDto;
-import com.interplug.reactapi.biz.dto.board.BoardSearchResponseDto;
-import com.interplug.reactapi.biz.dto.board.BoardUpdateRequestDto;
+import com.interplug.reactapi.biz.dto.board.request.BoardSaveRequestDto;
+import com.interplug.reactapi.biz.dto.board.response.BoardSearchDetailResponseDto;
+import com.interplug.reactapi.biz.dto.board.response.BoardSearchResponseDto;
+import com.interplug.reactapi.biz.dto.board.request.BoardUpdateRequestDto;
 import com.interplug.reactapi.biz.entity.BoardEntity;
 import com.interplug.reactapi.biz.repository.board.BoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,24 @@ public class BoardService {
     public List<BoardSearchResponseDto> getBoardList(){
         List<BoardEntity> boardEntityList = boardRepository.findAll();
         return boardEntityList.stream().map(BoardSearchResponseDto::new).collect(Collectors.toList());
+    }
+
+    /**
+     *
+     *
+     * <pre>
+     * 게시판 게시글 상세 조회
+     * </pre>
+     *
+     * @author junguKang (junguKang)
+     * @return boardEntityList
+     */
+
+    public BoardSearchDetailResponseDto getBoardDetail(Long id){
+        BoardEntity boardEntity = boardRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException(id + "의 상세 게시글이 존재하지 않습니다."));
+
+        return new BoardSearchDetailResponseDto(boardEntity);
     }
 
     /**

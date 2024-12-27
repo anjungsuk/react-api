@@ -1,7 +1,6 @@
 package com.interplug.reactapi.biz.entity;
 
-import ch.qos.logback.classic.Logger;
-import com.interplug.reactapi.biz.dto.board.BoardUpdateRequestDto;
+import com.interplug.reactapi.biz.dto.board.request.BoardUpdateRequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
