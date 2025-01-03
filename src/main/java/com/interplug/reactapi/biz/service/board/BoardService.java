@@ -4,7 +4,7 @@ import com.interplug.reactapi.biz.dto.board.request.BoardSaveRequestDto;
 import com.interplug.reactapi.biz.dto.board.response.BoardSearchDetailResponseDto;
 import com.interplug.reactapi.biz.dto.board.response.BoardSearchResponseDto;
 import com.interplug.reactapi.biz.dto.board.request.BoardUpdateRequestDto;
-import com.interplug.reactapi.biz.entity.BoardEntity;
+import com.interplug.reactapi.biz.entity.board.BoardEntity;
 import com.interplug.reactapi.biz.repository.board.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,8 +29,8 @@ public class BoardService {
      * @author junguKang (junguKang)
      * @return boardEntityList
      */
-    public List<BoardSearchResponseDto> getBoardList(){
-        List<BoardEntity> boardEntityList = boardRepository.findAll();
+    public List<BoardSearchResponseDto> getBoardList(String category, String condition,String keyword){
+        List<BoardEntity> boardEntityList = boardRepository.findAllByCategoryCdAndTitleAndWriterNm(category, condition, keyword);
         return boardEntityList.stream().map(BoardSearchResponseDto::new).collect(Collectors.toList());
     }
 

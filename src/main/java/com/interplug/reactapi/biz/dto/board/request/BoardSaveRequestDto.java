@@ -1,6 +1,6 @@
 package com.interplug.reactapi.biz.dto.board.request;
 
-import com.interplug.reactapi.biz.entity.BoardEntity;
+import com.interplug.reactapi.biz.entity.board.BoardEntity;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
 import lombok.Getter;

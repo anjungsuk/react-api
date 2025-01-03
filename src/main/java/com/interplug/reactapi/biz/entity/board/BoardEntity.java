@@ -1,4 +1,4 @@
-package com.interplug.reactapi.biz.entity;
+package com.interplug.reactapi.biz.entity.board;
 
 import com.interplug.reactapi.biz.dto.board.request.BoardUpdateRequestDto;
 import jakarta.persistence.*;

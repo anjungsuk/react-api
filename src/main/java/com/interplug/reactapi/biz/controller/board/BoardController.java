@@ -4,9 +4,10 @@ import com.interplug.reactapi.biz.dto.board.request.BoardSaveRequestDto;
 import com.interplug.reactapi.biz.dto.board.response.BoardSearchDetailResponseDto;
 import com.interplug.reactapi.biz.dto.board.response.BoardSearchResponseDto;
 import com.interplug.reactapi.biz.dto.board.request.BoardUpdateRequestDto;
-import com.interplug.reactapi.biz.entity.BoardEntity;
+import com.interplug.reactapi.biz.entity.board.BoardEntity;
 import com.interplug.reactapi.biz.service.board.BoardService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -37,9 +38,12 @@ public class BoardController {
     @Operation(summary = "목록조회", description = "조회 성공시 게시판 목록을 반환한다.")
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
-    @PostMapping("/list")
-    public ResponseEntity<List<BoardSearchResponseDto>> getBoardList(){
-        List<BoardSearchResponseDto> boardList = boardService.getBoardList();
+    @Parameter(name = "categoryCd", description = "카테고리", example = "notice")
+    @Parameter(name = "condition", description = "검색 조건", example = "title")
+    @Parameter(name = "keyword", description = "검색어", example = "Spring")
+    @GetMapping("/list")
+    public ResponseEntity<List<BoardSearchResponseDto>> getBoardList(@RequestParam String category, @RequestParam String condition, @RequestParam String keyword){
+        List<BoardSearchResponseDto> boardList = boardService.getBoardList(category, condition, keyword);
         return ResponseEntity.ok(boardList);
     }
     /**

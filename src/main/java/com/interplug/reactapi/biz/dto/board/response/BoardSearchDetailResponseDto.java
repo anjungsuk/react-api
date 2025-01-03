@@ -1,6 +1,6 @@
 package com.interplug.reactapi.biz.dto.board.response;
 
-import com.interplug.reactapi.biz.entity.BoardEntity;
+import com.interplug.reactapi.biz.entity.board.BoardEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
