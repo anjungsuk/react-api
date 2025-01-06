@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 @Table(name = "bt_tb_board")
 public class BoardEntity{
 
-    private static final org.slf4j.Logger log = LoggerFactory.getLogger(BoardEntity.class);
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_no", nullable = false)
@@ -49,9 +48,7 @@ public class BoardEntity{
     @PrePersist
     public void prePersist() {
         this.regDt = LocalDateTime.now();
-        log.info("prePersist");
         this.viewCnt = 0;
-        log.info("prePersist viewCnt={}", viewCnt);
     }
 
     @PreUpdate

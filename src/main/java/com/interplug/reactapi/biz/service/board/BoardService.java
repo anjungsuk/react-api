@@ -7,11 +7,13 @@ import com.interplug.reactapi.biz.dto.board.request.BoardUpdateRequestDto;
 import com.interplug.reactapi.biz.entity.board.BoardEntity;
 import com.interplug.reactapi.biz.repository.board.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,11 +29,22 @@ public class BoardService {
      * </pre>
      *
      * @author junguKang (junguKang)
+     * @param searchCategory
+     * @param searchType
+     * @param searchKeyword
+     * @param sortType
+     * @param pageNumber
+     * @param size
      * @return boardEntityList
      */
-    public List<BoardSearchResponseDto> getBoardList(String category, String condition,String keyword){
-        List<BoardEntity> boardEntityList = boardRepository.findAllByCategoryCdAndTitleAndWriterNm(category, condition, keyword);
-        return boardEntityList.stream().map(BoardSearchResponseDto::new).collect(Collectors.toList());
+    public Page<BoardSearchResponseDto> getBoardList(String searchCategory, String searchType, String searchKeyword, String sortType, int pageNumber, int size){
+
+        Sort sort = sortType.equals("createDate") ? Sort.by("createDate").descending() : Sort.by("viewCnt").descending();
+
+        PageRequest page = PageRequest.of(pageNumber, size, sort);
+
+        return boardRepository.searchBoardDynamicList(page, searchCategory, searchType, searchKeyword);
+        //return boardEntityList.stream().map(BoardSearchResponseDto::new).collect(Collectors.toList());
     }
 
     /**

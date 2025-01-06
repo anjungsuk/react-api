@@ -11,12 +11,16 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.connector.Response;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/board/v1")
@@ -38,12 +42,23 @@ public class BoardController {
     @Operation(summary = "목록조회", description = "조회 성공시 게시판 목록을 반환한다.")
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
-    @Parameter(name = "categoryCd", description = "카테고리", example = "notice")
-    @Parameter(name = "condition", description = "검색 조건", example = "title")
-    @Parameter(name = "keyword", description = "검색어", example = "Spring")
+    @Parameter(name = "searchCategory", description = "카테고리", example = "notice")
+    @Parameter(name = "searchType", description = "검색 조건", example = "title")
+    @Parameter(name = "searchKeyword", description = "검색어", example = "Spring")
+    @Parameter(name = "page", description = "페이지 시작", example = "0")
+    @Parameter(name = "size", description = "페이지 사이즈", example = "10")
+    @Parameter(name = "sort", description = "정렬 순서", example = "createDate")
     @GetMapping("/list")
-    public ResponseEntity<List<BoardSearchResponseDto>> getBoardList(@RequestParam String category, @RequestParam String condition, @RequestParam String keyword){
-        List<BoardSearchResponseDto> boardList = boardService.getBoardList(category, condition, keyword);
+    public ResponseEntity<?>getBoardList(
+            @RequestParam(value = "searchCategory", required = false) String searchCategory,
+            @RequestParam(value = "searchType", required = false) String searchType,
+            @RequestParam(value = "searchKeyword" , required = false) String searchKeyword,
+            @RequestParam("sort") String sort,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
+        log.info("parameter >> searchCategory = {}, searchType = {}, searchKeyword = {}", searchCategory, searchType, searchKeyword);
+
+        Page<BoardSearchResponseDto> boardList = boardService.getBoardList(searchCategory, searchType, searchKeyword, sort, page, size);
         return ResponseEntity.ok(boardList);
     }
     /**
