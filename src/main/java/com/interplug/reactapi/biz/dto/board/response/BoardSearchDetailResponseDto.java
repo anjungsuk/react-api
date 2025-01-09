@@ -16,6 +16,8 @@ public class BoardSearchDetailResponseDto {
     private String categoryCd;
     //title
     private String title;
+    //cont
+    private String cont;
     //writerNm
     private String writerNm;
     //viewCnt
@@ -30,6 +32,7 @@ public class BoardSearchDetailResponseDto {
         this.boardNo = boardEntity.getBoardNo();
         this.categoryCd = boardEntity.getCategoryCd();
         this.title = boardEntity.getTitle();
+        this.cont = boardEntity.getCont();
         this.writerNm = boardEntity.getWriterNm();
         this.viewCnt = boardEntity.getViewCnt();
         this.regDt = boardEntity.getRegDt();

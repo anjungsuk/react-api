@@ -76,8 +76,8 @@ public class BoardController {
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNER SEVER ERROR")
-    @GetMapping("/listDetail/{id}")
-    public ResponseEntity<BoardSearchDetailResponseDto> getBoardDetail(@RequestParam Long id){
+    @GetMapping("/listDetail")
+    public ResponseEntity<BoardSearchDetailResponseDto> getBoardDetail(@RequestParam("id") Long id){
         BoardSearchDetailResponseDto boardSearchDetailResponseDto = boardService.getBoardDetail(id);
         return ResponseEntity.ok(boardSearchDetailResponseDto);
     }
@@ -141,8 +141,8 @@ public class BoardController {
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNER SEVER ERROR")
-    @DeleteMapping("/listDelete/{id}")
-    public ResponseEntity<BoardEntity> deleteBoard(@RequestParam Long id){
+    @DeleteMapping("/listDelete")
+    public ResponseEntity<BoardEntity> deleteBoard(@RequestParam("id") Long id){
         boardService.deleteBoard(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
